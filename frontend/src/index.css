@@ -1,0 +1,60 @@
+:root {
+  --bg-base: #0f1117;
+  --bg-card: #1a1d27;
+  --bg-card-hover: #22263a;
+  --border: #2e3247;
+  --text-primary: #e2e6f3;
+  --text-secondary: #8b90a8;
+  --text-muted: #555c78;
+  --accent: #4c8cf5;
+  --accent-hover: #6aa0ff;
+  --success: #2ecc71;
+  --warning: #f39c12;
+  --danger: #e74c3c;
+  --deal: #27ae60;
+  --deal-bg: rgba(39, 174, 96, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: 14px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}

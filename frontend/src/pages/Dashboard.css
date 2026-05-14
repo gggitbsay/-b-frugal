@@ -1,0 +1,100 @@
+.dashboard {
+  padding: 20px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.dashboard-stats {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.stat-chip {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.stat-chip--deal {
+  background: var(--deal-bg);
+  border-color: var(--deal);
+  color: var(--deal);
+  font-weight: 700;
+}
+
+.dashboard-filters {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-input,
+.filter-select {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  padding: 6px 10px;
+  font-size: 13px;
+  transition: border-color 0.15s;
+}
+
+.filter-input:focus,
+.filter-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.dashboard-loading,
+.dashboard-empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 60px 0;
+}
+
+.dashboard-empty p {
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+
+.dashboard-error {
+  color: var(--danger);
+  background: rgba(231, 76, 60, 0.1);
+  border: 1px solid var(--danger);
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-retry {
+  background: none;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 12px;
+  margin-left: auto;
+}
