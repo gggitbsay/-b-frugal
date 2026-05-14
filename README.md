@@ -6,22 +6,24 @@ A self-hosted price tracking dashboard for Dutch/EU online stores. Paste the sni
 
 ## Setup
 
-**1. Clone the repo**
+**1. Clone the repo next to your other containers**
 
 ```bash
+cd /docker/appdata
 git clone https://github.com/gggitbsay/-b-frugal.git pricewatch
 ```
+
+> Adjust the path to wherever your other container folders live.
 
 **2. Add to your `docker-compose.yml`**
 
 ```yaml
-services:
   pricewatch-api:
-    build: ./pricewatch/api
+    build: ./appdata/pricewatch/api
     ports:
       - "8000:8000"
     volumes:
-      - ./pricewatch/data/db:/data/db
+      - ./appdata/pricewatch/data/db:/data/db
     environment:
       - DATABASE_URL=sqlite:////data/db/pricewatch.db
       - CHANGEDETECTION_URL=http://pricewatch-changedetection:5000
@@ -29,9 +31,9 @@ services:
     restart: unless-stopped
 
   pricewatch-scheduler:
-    build: ./pricewatch/scheduler
+    build: ./appdata/pricewatch/scheduler
     volumes:
-      - ./pricewatch/data/db:/data/db
+      - ./appdata/pricewatch/data/db:/data/db
     environment:
       - DATABASE_URL=sqlite:////data/db/pricewatch.db
       - API_URL=http://pricewatch-api:8000
@@ -42,7 +44,7 @@ services:
     restart: unless-stopped
 
   pricewatch-frontend:
-    build: ./pricewatch/frontend
+    build: ./appdata/pricewatch/frontend
     ports:
       - "3000:80"
     depends_on:
@@ -54,7 +56,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./pricewatch/data/changedetection:/datastore
+      - ./appdata/pricewatch/data/changedetection:/datastore
     restart: unless-stopped
 ```
 
@@ -99,10 +101,10 @@ Coolblue · bol.com · MediaMarkt NL · IKEA NL · Hornbach NL · Zalando NL
 
 ## Data
 
-All data lives in `./pricewatch/data/` and survives container restarts automatically. No additional setup needed.
+All data lives in `./appdata/pricewatch/data/` and survives container restarts automatically.
 
 ```
-pricewatch/data/
+appdata/pricewatch/data/
 ├── db/               ← SQLite database
 └── changedetection/  ← Changedetection.io datastore
 ```
