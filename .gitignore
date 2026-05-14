@@ -1,0 +1,14 @@
+data/db/*.db
+data/changedetection/
+!data/db/.gitkeep
+!data/changedetection/.gitkeep
+.env
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+node_modules/
+dist/
+frontend/dist/
+*.egg-info/
+.DS_Store

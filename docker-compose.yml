@@ -1,0 +1,55 @@
+services:
+  api:
+    build: ./api
+    container_name: pricewatch-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data/db:/data/db
+    environment:
+      - DATABASE_URL=sqlite:////data/db/pricewatch.db
+      - CHANGEDETECTION_URL=http://changedetection:5000
+      - CHANGEDETECTION_API_KEY=${CHANGEDETECTION_API_KEY:-}
+    depends_on:
+      - changedetection
+    restart: unless-stopped
+
+  scheduler:
+    build: ./scheduler
+    container_name: pricewatch-scheduler
+    volumes:
+      - ./data/db:/data/db
+    environment:
+      - DATABASE_URL=sqlite:////data/db/pricewatch.db
+      - API_URL=http://api:8000
+      - CHANGEDETECTION_URL=http://changedetection:5000
+      - CHANGEDETECTION_API_KEY=${CHANGEDETECTION_API_KEY:-}
+    depends_on:
+      - api
+      - changedetection
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: pricewatch-frontend
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  changedetection:
+    image: ghcr.io/dgtlmoon/changedetection.io
+    container_name: pricewatch-changedetection
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data/changedetection:/datastore
+    environment:
+      - HIDE_REFERER=true
+    restart: unless-stopped
+
+volumes:
+  db-data:
